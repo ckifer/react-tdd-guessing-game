@@ -1,0 +1,28 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+/**
+ * Congrats component
+ * @function
+ * @param {object} props
+ * @returns {JSX.Element}
+ */
+const Congrats = ({ success }) => {
+  if (success) {
+    return (
+      <div data-test='component-congrats'>
+        <span data-test='congrats-message'>
+          Congrats! You guessed the word!
+        </span>
+      </div>
+    );
+  } else {
+    return <div data-test='component-congrats'></div>;
+  }
+};
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired
+};
+
+export default Congrats;
