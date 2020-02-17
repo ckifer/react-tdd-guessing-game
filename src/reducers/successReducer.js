@@ -1,3 +1,5 @@
+import { types } from '../actions';
+
 /**
  * @function successReducer
  * @param {array} state
@@ -5,5 +7,10 @@
  * @returns {boolean} - new success state
  */
 export default (state, action) => {
-  return null;
+  switch (action.type) {
+    case types.CORRECT_GUESS:
+      return true;
+    default:
+      return false;
+  }
 };
