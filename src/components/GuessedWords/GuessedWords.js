@@ -4,21 +4,25 @@ import PropTypes from 'prop-types';
 const GuessedWords = props => {
   let contents;
   if (props.guessedWords.length === 0) {
-    contents = <span data-test='guess-instructions'>Try to guess a word</span>;
+    contents = (
+      <span data-test='guess-instructions'>Try to guess the secret word</span>
+    );
   } else {
-    const guessedWordsRows = props.guessedWords.map((word, index) => (
-      <tr key={index} data-test='guessed-word'>
+    const guessedWordsRows = props.guessedWords.map(word => (
+      <tr data-test='guessed-word' key={word.guessedWord}>
         <td>{word.guessedWord}</td>
         <td>{word.letterMatchCount}</td>
       </tr>
     ));
     contents = (
-      <div data-test='guessed-words'>
+      <div data-test='guessed-words' className='row'>
         <h3>Guessed Words</h3>
-        <table>
-          <thead>
-            <tr>Guess</tr>
-            <tr>Matching Letters</tr>
+        <table className='table table-sm'>
+          <thead className='thead thead-light'>
+            <tr>
+              <th>Guess</th>
+              <th>Matching Letters</th>
+            </tr>
           </thead>
           <tbody>{guessedWordsRows}</tbody>
         </table>
