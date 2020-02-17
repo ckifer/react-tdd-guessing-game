@@ -8,7 +8,7 @@ import Congrats from './Congrats';
 const defaultProps = { success: false };
 
 /**
- * Factory function to create a ShallowWrapper for the App compoenent
+ * Factory function to create a ShallowWrapper for the App component
  * @function setup
  * @param {object} props
  * @param {object} state - initial state

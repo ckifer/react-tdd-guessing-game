@@ -15,7 +15,7 @@ const defaultProps = {
 };
 
 /**
- * Factory function to create a ShallowWrapper for the GuessedWords compoenent
+ * Factory function to create a ShallowWrapper for the GuessedWords component
  * @function setup
  * @param {object} props
  * @param {object} state - initial state
@@ -51,14 +51,14 @@ describe('if no words guessed', () => {
 describe('if words are guessed', () => {
   let wrapper;
   const guessedWords = [
-    {guessedWord: 'train', letterMatchCount: 3},
-    {guessedWord: 'agile', letterMatchCount: 1},
-    {guessedWord: 'party', letterMatchCount: 5}
+    { guessedWord: 'train', letterMatchCount: 3 },
+    { guessedWord: 'agile', letterMatchCount: 1 },
+    { guessedWord: 'party', letterMatchCount: 5 }
   ];
   beforeEach(() => {
     wrapper = setup({ guessedWords });
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'component-guessed-words');
     expect(component.length).toBe(1);
