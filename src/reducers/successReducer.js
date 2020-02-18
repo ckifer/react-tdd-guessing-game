@@ -6,11 +6,11 @@ import { types } from '../actions';
  * @param {object} action
  * @returns {boolean} - new success state
  */
-export default (state, action) => {
+export default (state = false, action) => {
   switch (action.type) {
     case types.CORRECT_GUESS:
       return true;
     default:
-      return false;
+      return state;
   }
 };

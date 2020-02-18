@@ -49,11 +49,12 @@ describe('render', () => {
       const component = findByTestAttr(wrapper, 'component-input');
       expect(component.length).toBe(1);
     });
+
     test('should NOT render input box', () => {
       const inputBox = findByTestAttr(wrapper, 'input-box');
-      console.log(inputBox);
       expect(inputBox.length).toBe(0);
     });
+
     test('should NOT render submit btn', () => {
       const submitBtn = findByTestAttr(wrapper, 'submit-btn');
       expect(submitBtn.length).toBe(0);
