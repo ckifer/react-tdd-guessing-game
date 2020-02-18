@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { storeFactory } from '../../../test/testUtils';
+import { storeFactory, findByTestAttr } from '../../../test/testUtils';
 import Input from './Input';
 
 /**
@@ -20,9 +20,23 @@ const setup = (initialState = {}) => {
 
 describe('render', () => {
   describe('word has not been guessed ', () => {
-    test('should render component without error', () => {});
-    test('render input box', () => {});
-    test('render submit btn', () => {});
+    let wrapper;
+    beforeEach(() => {
+      const initialState = { success: false };
+      wrapper = setup(initialState);
+    });
+    test('should render component without error', () => {
+      const component = findByTestAttr(wrapper, 'component-input');
+      expect(component.length).toBe(1);
+    });
+    test('render input box', () => {
+      const component = findByTestAttr(wrapper, 'input-box');
+      expect(component.length).toBe(1);
+    });
+    test('render submit btn', () => {
+      const component = findByTestAttr(wrapper, 'submit-btn');
+      expect(component.length).toBe(1);
+    });
   });
   describe('word has been guessed ', () => {
     test('should NOT render component without error', () => {});

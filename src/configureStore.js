@@ -1,4 +1,8 @@
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 
-export default createStore(rootReducer);
+const initialState = {
+  success: false
+};
+
+export default createStore(rootReducer, initialState);
