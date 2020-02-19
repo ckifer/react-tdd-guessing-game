@@ -64,7 +64,7 @@ describe('render', () => {
 
 describe('update state', () => {});
 
-describe('redux props', () => {
+describe('Input redux props', () => {
   test('should have success pieces of state as prop', () => {
     const success = true;
     const wrapper = setup({ success });
