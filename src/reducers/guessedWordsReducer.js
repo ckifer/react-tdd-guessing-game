@@ -4,7 +4,7 @@ import { types } from '../actions';
  * @function guessedWordsReducer
  * @param {array} state array of guessed words
  * @param {object} action action to be reduced
- * @returns {boolean} - new guessedWords state
+ * @returns {array} - new guessedWords state
  */
 export default (state = [], { payload, type }) => {
   switch (type) {
