@@ -6,10 +6,10 @@ import { types } from '../actions';
  * @param {object} action action to be reduced
  * @returns {boolean} - new guessedWords state
  */
-export default (state = null, action) => {
-  switch (action.type) {
+export default (state = [], { payload, type }) => {
+  switch (type) {
     case types.GUESS_WORD:
-      return null;
+      return [...state, payload];
     default:
       return state;
   }
