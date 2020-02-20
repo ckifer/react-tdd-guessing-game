@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import App from './App';
+import App, { UnconnectedApp } from './App';
 import { storeFactory } from '../test/testUtils';
 
 /**
@@ -46,4 +45,24 @@ describe('App redux props', () => {
     const secretWordProp = wrapper.instance().props.getSecretWord;
     expect(secretWordProp).toBeInstanceOf(Function);
   });
+});
+
+test('should run `getSecretWord` on app mount', () => {
+  const getSecretWordMock = jest.fn();
+
+  const props = {
+    getSecretWord: getSecretWordMock,
+    success: false,
+    guessedWord: []
+  };
+
+  // setup app with getSecretWordMock as prop
+  const wrapper = shallow(<UnconnectedApp {...props} />);
+
+  // run lifecycle method
+  wrapper.instance().componentDidMount();
+
+  // check to see if mock ran
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+  expect(getSecretWordCallCount).toBe(1);
 });
