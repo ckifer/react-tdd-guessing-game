@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { guessWord } from '../../actions';
+import { guessWord, giveUp } from '../../actions';
 
 /**
  * @method constructor
@@ -16,6 +16,7 @@ export class UnconnectedInput extends Component {
     };
 
     this.submitGuessedWord = this.submitGuessedWord.bind(this);
+    this.giveUpOnClick = this.giveUpOnClick.bind(this);
   }
   submitGuessedWord(e) {
     e.preventDefault();
@@ -25,37 +26,52 @@ export class UnconnectedInput extends Component {
       this.setState({ currentGuess: '' });
     }
   }
+  giveUpOnClick(e) {
+    e.preventDefault();
+    this.props.giveUp();
+  }
   render() {
-    const contents = this.props.success ? null : (
-      <form className='form-inline'>
-        <div className='form-group'>
-          <input
-            data-test='input-box'
-            type='text'
-            className='mb-2 mx-sm-3 form-control'
-            placeholder='enter guess...'
-            value={this.state.currentGuess}
-            onChange={e => this.setState({ currentGuess: e.target.value })}
-          />
-          <button
-            data-test='submit-btn'
-            type='submit'
-            className='btn btn-primary'
-            onClick={this.submitGuessedWord}
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    );
+    const contents =
+      this.props.success || this.props.gaveUp ? null : (
+        <form className='form-inline'>
+          <div className='form-group'>
+            <input
+              data-test='input-box'
+              type='text'
+              className='mb-2 mx-sm-3 form-control'
+              placeholder='enter guess...'
+              value={this.state.currentGuess}
+              onChange={e => this.setState({ currentGuess: e.target.value })}
+            />
+            <button
+              data-test='submit-btn'
+              type='submit'
+              className='btn btn-primary mb-2 mr-1'
+              onClick={this.submitGuessedWord}
+            >
+              Submit
+            </button>
+            <button
+              data-test='give-up-button'
+              className='btn btn-danger mb-2 ml-1'
+              onClick={this.giveUpOnClick}
+            >
+              Give Up!
+            </button>
+          </div>
+        </form>
+      );
     return <div data-test='component-input'>{contents}</div>;
   }
 }
 
-const mapStateToProps = ({ success }) => {
+const mapStateToProps = ({ success, gaveUp }) => {
   return {
-    success
+    success,
+    gaveUp
   };
 };
 
-export default connect(mapStateToProps, { guessWord })(UnconnectedInput);
+export default connect(mapStateToProps, { guessWord, giveUp })(
+  UnconnectedInput
+);

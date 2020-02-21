@@ -19,29 +19,37 @@ const setup = (initialState = {}) => {
 };
 
 describe('App redux props', () => {
+  let wrapper;
+  const success = false;
+  const gaveUp = false;
+  const secretWord = 'party';
+  const guessedWords = [{ guessedWord: 'agile', letterMatchCount: 1 }];
+
+  beforeEach(() => {
+    wrapper = setup({
+      success,
+      gaveUp,
+      secretWord,
+      guessedWords
+    });
+  });
+
   test('should have success pieces of state as prop', () => {
-    const success = false;
-    const wrapper = setup({ success });
     const successProp = wrapper.instance().props.success;
     expect(successProp).toBe(success);
   });
 
   test('should have secretWord pieces of state as prop', () => {
-    const secretWord = 'party';
-    const wrapper = setup({ secretWord });
     const secretWordProp = wrapper.instance().props.secretWord;
     expect(secretWordProp).toBe(secretWord);
   });
 
   test('should have guessedWords pieces of state as prop', () => {
-    const guessedWords = [{ guessedWord: 'agile', letterMatchCount: 1 }];
-    const wrapper = setup({ guessedWords });
     const secretWordProp = wrapper.instance().props.guessedWords;
     expect(secretWordProp).toEqual(guessedWords);
   });
 
   test('should have `getSecretWord` action creator as function prop', () => {
-    const wrapper = setup();
     const secretWordProp = wrapper.instance().props.getSecretWord;
     expect(secretWordProp).toBeInstanceOf(Function);
   });
@@ -53,7 +61,8 @@ test('should run `getSecretWord` on app mount', () => {
   const props = {
     getSecretWord: getSecretWordMock,
     success: false,
-    guessedWord: []
+    guessedWord: [],
+    gaveUp: false
   };
 
   // setup app with getSecretWordMock as prop

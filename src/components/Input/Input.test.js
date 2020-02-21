@@ -62,7 +62,20 @@ describe('render', () => {
   });
 });
 
-describe('update state', () => {});
+test('calls `giveUp` prop upon "Give Up" button click', () => {
+  // create a mock function so we can see whether it's called on click
+  const giveUpMock = jest.fn();
+
+  // set up Input, with giveUpMock as a prop
+  const wrapper = shallow(<UnconnectedInput giveUp={giveUpMock} />);
+
+  // simulate click on giveUp button
+  const giveUpButton = findByTestAttr(wrapper, 'give-up-button');
+  giveUpButton.simulate('click', { preventDefault() {} });
+
+  // expect the mock to have been called once
+  expect(giveUpMock.mock.calls.length).toBe(1);
+});
 
 describe('Input redux props', () => {
   test('should have success pieces of state as prop', () => {

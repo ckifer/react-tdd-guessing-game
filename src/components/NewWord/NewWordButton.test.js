@@ -42,13 +42,13 @@ describe('render', () => {
     const component = findByTestAttr(wrapper, 'component-new-word-btn');
     expect(component.text()).toBe('');
   });
+});
 
-  test('calls resetAction on button click', () => {
-    const resetActionMock = jest.fn();
-    const wrapper = setup({ display: true, resetAction: resetActionMock });
-    const resetBtn = findByTestAttr(wrapper, 'component-new-word-btn');
+test('calls resetAction on button click', () => {
+  const resetActionMock = jest.fn();
+  const wrapper = setup({ display: true, resetAction: resetActionMock });
+  const resetBtn = findByTestAttr(wrapper, 'component-new-word-btn');
 
-    resetBtn.simulate('click');
-    expect(resetActionMock.mock.calls.length).toBe(1);
-  });
+  resetBtn.simulate('click');
+  expect(resetActionMock.mock.calls.length).toBe(1);
 });

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getSecretWord, resetGame } from './actions';
 import './App.css';
 import NewWordButton from './components/NewWord/NewWordButton';
+import SecretWordReveal from './components/SecretWordReveal/SecretWordReveal';
 
 export class UnconnectedApp extends Component {
   /**
@@ -23,8 +24,12 @@ export class UnconnectedApp extends Component {
         <h1>Jotto</h1>
         <div>The secret word is {this.props.secretWord}</div>
         <Congrats success={this.props.success} />
+        <SecretWordReveal
+          secretWord={this.props.secretWord}
+          display={this.props.gaveUp}
+        />
         <NewWordButton
-          display={this.props.success}
+          display={this.props.success || this.props.gaveUp}
           resetAction={this.props.resetGame}
         />
         <Input />
@@ -36,8 +41,8 @@ export class UnconnectedApp extends Component {
 }
 
 const mapStateToProps = state => {
-  const { success, guessedWords, secretWord } = state;
-  return { success, guessedWords, secretWord };
+  const { success, guessedWords, secretWord, gaveUp } = state;
+  return { success, guessedWords, secretWord, gaveUp };
 };
 
 const actions = {
