@@ -73,4 +73,15 @@ describe('if words are guessed', () => {
     const guessedWordNodes = findByTestAttr(wrapper, 'guessed-word');
     expect(guessedWordNodes.length).toBe(guessedWords.length);
   });
+
+  test('display correct number of guess in table', () => {
+    const guessedWordIndexNodes = findByTestAttr(wrapper, 'guessed-word-index');
+    const indexTestSet = new Set(
+      guessedWordIndexNodes.map(wrapper => wrapper.text())
+    );
+    const expectedSet = new Set(
+      guessedWords.map((word, index) => (index + 1).toString())
+    );
+    expect(indexTestSet).toEqual(expectedSet);
+  });
 });

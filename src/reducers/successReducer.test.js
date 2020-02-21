@@ -10,4 +10,8 @@ describe('test success reducer', () => {
     const newState = successReducer(undefined, { type: types.CORRECT_GUESS });
     expect(newState).toBe(true);
   });
+  test('should return state of false when game is reset', () => {
+    const newState = successReducer(true, { type: types.RESET_GAME });
+    expect(newState).toBe(false);
+  });
 });
