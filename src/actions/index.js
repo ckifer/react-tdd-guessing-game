@@ -6,7 +6,8 @@ export const types = {
   GUESS_WORD: 'GUESS_WORD',
   SET_SECRET_WORD: 'SET_SECRET_WORD',
   RESET_GAME: 'RESET_GAME',
-  GIVE_UP: 'GIVE_UP'
+  GIVE_UP: 'GIVE_UP',
+  SERVER_ERROR: 'SERVER_ERROR'
 };
 
 /**
@@ -40,12 +41,19 @@ export const guessWord = guessedWord => {
  * @returns {function} Redux Thunk function
  */
 const getSecretWordDispatch = dispatch => {
-  return axios.get('http://localhost:3030').then(response => {
-    dispatch({
-      type: types.SET_SECRET_WORD,
-      payload: response.data
+  return axios
+    .get('http://localhost:3030')
+    .then(response => {
+      dispatch({
+        type: types.SET_SECRET_WORD,
+        payload: response.data
+      });
+    })
+    .catch(e => {
+      dispatch({
+        type: types.SERVER_ERROR
+      });
     });
-  });
 };
 
 /**
@@ -73,10 +81,10 @@ export const resetGame = () => {
 };
 
 /**
- * give up action
+ * Simple action creator that returns GIVE_UP action type.
  * @function giveUp
- * @returns {function} Redux Thunk function
- */
+ * @returns {object} - GIVE_UP action type.
+*/
 export const giveUp = () => {
   return { type: types.GIVE_UP };
 };

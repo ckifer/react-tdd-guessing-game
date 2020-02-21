@@ -28,4 +28,38 @@ describe('get secret word action creator', () => {
       expect(newState.secretWord).toBe(secretWord);
     });
   });
+
+  describe('update `serverError` to true', () => {
+    test('when server returns 4xx status code', () => {
+      const store = storeFactory();
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 404
+        });
+      });
+
+      return store.dispatch(getSecretWord()).then(() => {
+        const newState = store.getState();
+        expect(newState.serverError).toBe(true);
+      });
+    });
+
+    test('when server returns 5xx status code', () => {
+      const store = storeFactory();
+
+      moxios.wait(() => {
+        const req = moxios.requests.mostRecent();
+        req.respondWith({
+          status: 500
+        });
+      });
+
+      return store.dispatch(getSecretWord()).then(() => {
+        const newState = store.getState();
+        expect(newState.serverError).toBe(true);
+      });
+    });
+  });
 });

@@ -17,6 +17,7 @@ describe('guessWord action dispatcher', () => {
         ...initialState,
         gaveUp: false,
         success: true,
+        serverError: false,
         guessedWords: [
           {
             guessedWord: secretWord,
@@ -34,6 +35,7 @@ describe('guessWord action dispatcher', () => {
         ...initialState,
         gaveUp: false,
         success: false,
+        serverError: false,
         guessedWords: [
           {
             guessedWord: unsuccessfulGuess,
@@ -59,6 +61,7 @@ describe('guessWord action dispatcher', () => {
         secretWord,
         gaveUp: false,
         success: true,
+        serverError: false,
         guessedWords: [
           ...guessedWords,
           {
@@ -76,6 +79,7 @@ describe('guessWord action dispatcher', () => {
         secretWord,
         success: false,
         gaveUp: false,
+        serverError: false,
         guessedWords: [
           ...guessedWords,
           {

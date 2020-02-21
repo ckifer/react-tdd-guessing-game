@@ -7,6 +7,7 @@ import { getSecretWord, resetGame } from './actions';
 import './App.css';
 import NewWordButton from './components/NewWord/NewWordButton';
 import SecretWordReveal from './components/SecretWordReveal/SecretWordReveal';
+import ServerError from './components/ServerError/ServerError';
 
 export class UnconnectedApp extends Component {
   /**
@@ -19,30 +20,40 @@ export class UnconnectedApp extends Component {
   }
 
   render() {
+    let contents;
+    if (this.props.serverError) {
+      contents = <ServerError />;
+    } else {
+      contents = (
+        <div>
+          <div>The secret word is {this.props.secretWord}</div>
+          <Congrats success={this.props.success} />
+          <SecretWordReveal
+            secretWord={this.props.secretWord}
+            display={this.props.gaveUp}
+          />
+          <NewWordButton
+            display={this.props.success || this.props.gaveUp}
+            resetAction={this.props.resetGame}
+          />
+          <Input />
+          <GuessedWords guessedWords={this.props.guessedWords} />
+          <NewWordButton display={false} />
+        </div>
+      );
+    }
     return (
       <div className='App container'>
         <h1>Jotto</h1>
-        <div>The secret word is {this.props.secretWord}</div>
-        <Congrats success={this.props.success} />
-        <SecretWordReveal
-          secretWord={this.props.secretWord}
-          display={this.props.gaveUp}
-        />
-        <NewWordButton
-          display={this.props.success || this.props.gaveUp}
-          resetAction={this.props.resetGame}
-        />
-        <Input />
-        <GuessedWords guessedWords={this.props.guessedWords} />
-        <NewWordButton display={false} />
+        {contents}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { success, guessedWords, secretWord, gaveUp } = state;
-  return { success, guessedWords, secretWord, gaveUp };
+  const { success, guessedWords, secretWord, gaveUp, serverError } = state;
+  return { success, guessedWords, secretWord, gaveUp, serverError };
 };
 
 const actions = {
